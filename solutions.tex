@@ -1,0 +1,132 @@
+\documentclass{article}
+
+% Set the margins to not be ridiculous
+\usepackage[margin=0.75in]{geometry}
+% Put space between paragraphs
+\usepackage{parskip}
+% For using images
+\usepackage{graphicx}
+\graphicspath{{gfx/}}
+
+\newcommand{\diagram}[1]{
+      \begin{center}
+            \includegraphics[width=1.3in]{#1}
+      \end{center}
+}
+
+\newcommand{\photo}[1]{
+      \begin{center}
+            Photo: #1
+      \end{center}
+}
+
+\begin{document}
+
+\def\han{Hanayama}
+\def\cc{counter-clockwise}
+
+\title{\han{} Puzzle Solutions Guide}
+\author{Dan Whitman}
+\date{}
+
+\maketitle
+
+\section{Valve (Level 4)}
+
+\photo{The assembled puzzle}
+
+\subsection{Overview}
+
+The Valve device consists of the following components:
+\begin{enumerate}
+      \item The gold colored inner ring with a hexagonal interior.
+      \item The gold colored outer ring with a hexagonal exterior.
+      \item The silver colored Valve half ring with ``VALVE'' printed on one side.
+      \item The silver colored \han{} ring with ``HANAYAMA'' printed on one side.
+\end{enumerate}
+These components are shown below, disassembled, in the above order from left to right.
+\photo{The components, from the top, from left to right in the above order}
+Note that, in the fully assembled state, the ``VALVE'' and ``HANAYAMA'' labels on the half rings are on opposite sides of the puzzle, like the two sides of a coin.
+
+\subsection{Structure}
+
+The entire puzzle is can be divided up into a circle consisting of six segments that correspond to the six sides of the hexagons on the inner and outer rings, and three layers.
+This is most clearly observed at the sides of the half rings, the insides and outsides of which are shown, respectively, below spread out with orientations as it normally assembled in the puzzle.
+\photo{Inside/outside the half rings spread out}
+A software model of the Valve puzzle was created to aid in devising a solution, and the models for the insides and outsides are shown below, respectively.
+\diagram{halves-00}
+In the model, the black section with H's is the \han{} half ring and the white section with the V's is the Valve half ring.
+Note how the model corresponds with the above photos.
+
+Both the inner and outer rings feature horizontal extrusions at various segments and layers that slide around in the grooves on the insides (for the inner ring) and outsides (for the outer ring) of the half rings.
+This forms a kind of maze that has to be blindly navigated in order to disassemble and reassemble the puzzle.
+It is not possible to fully view all the extrusions in a photo of the inner and outer rings, but they are shown below at an angle the renders some of them visible.
+\photo{Angled view of inner and outer rings}
+These extrusions are also modeled in software, shown below, corresponding to the photo above.
+\diagram{rings-00}
+Here the inner ring is peach-colored and labeled with I's while the outer ring is pink and labeled with O's.
+
+Though arbitrary, for the purposes of this analysis, we consider the silver colored half rings to be fixed, with the inner and outer rings rotating around them, independently of each other.
+For the solution, we hold the puzzle such that TODO
+\photo{Starting position}
+\diagram{starting-00}
+
+TODO:
+\begin{enumerate}
+      \item Specify home position (and maybe calling starting position instead), including which side is the top.
+      \item Define a segment.
+\end{enumerate}
+
+\subsection{Disassembly}
+
+Starting from the home position, the solution to disassemble the device is as follows:
+\begin{enumerate}
+      \item Rotate the inner ring all the way \cc{} two segments until it stops.
+            \diagram{apart-01}
+      \item Rotate the outer ring \cc{} one segment.
+            The \han{} half should drop down one layer.
+            \diagram{apart-02}
+      \item Rotate the inner ring \cc{} one segment, until it stops.
+            \diagram{apart-03}
+      \item Push the \han{} half back up and the inner ring will move with it.
+            \diagram{apart-04}
+      \item Holding the \han{} half up, rotate the outer ring clockwise two segments.
+            The Valve half should drop down one layer.
+            \diagram{apart-05}
+      \item Rotate the inner ring clockwise by one segment until it stops.
+            The Valve half should drop down another layer, taking the inner ring along with it.
+            \diagram{apart-06}
+      \item Rotate the outer ring \cc{} by two segments.
+            The \han{} half should drop down one layer.
+            \diagram{apart-07}
+      \item Rotate the inner ring \cc{} by one segment until it stops.
+            The \han{} half should drop down another layer, joining the Valve half and taking the inner ring with it.
+            \diagram{apart-08}
+      \item Rotate the outer ring clockwise by one segment.
+            The Valve half should drop down by another layer.
+            \diagram{apart-09}
+      \item Rotate the inner ring clockwise by one segment until it stops.
+            The Valve half and inner ring should then fall completely out from the outer ring and \han{} half, making the other half easy to remove as well.
+            \diagram{apart-10}
+\end{enumerate}
+
+\subsection{Reassembly}
+
+Reassembling the puzzle can be a bit tricky at first.
+To do so, perform the following steps:
+\begin{enumerate}
+      \item Fit and hold the inner ring along with the half rings according to the following.
+      The \han{} half should be on the left with its label facing up, and the Valve half on the right with its label facing down.
+      \diagram{together-01}
+      In the real world this looks like this:
+      \photo{Initial clump}
+      \item Still holding the inner and half rings with one hand so that they do not fall apart, place the outer ring on top with the other hand with the two lower extrusions resting on the top of the Valve half, shown below.
+      \photo{Outer ring on top}
+      \item Still holding the inner and half rings together, turn the outer ring by three segments in either direction, that is $180^\circ$.
+      The puzzle should now look as below:
+      \photo{Outer twisted}
+      The corresponding model state is:
+      \diagram{together-03}
+\item 
+\end{enumerate}
+\end{document}

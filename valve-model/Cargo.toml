@@ -1,0 +1,17 @@
+[package]
+edition = "2021"
+name = "valve-model"
+version = "0.1.0"
+
+[dependencies]
+anyhow = "1.0"
+bare_metal_modulo = "1.2"
+easycurses = "0.13"
+euclid = "0.22"
+itertools = "0.13"
+maplit = "1.0"
+non-empty-collections = "0.1"
+strum = "0.26"
+strum_macros = "0.26"
+thiserror = "1.0"
+undo = "0.51"
