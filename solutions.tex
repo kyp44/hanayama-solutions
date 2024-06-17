@@ -8,9 +8,9 @@
 \usepackage{graphicx}
 \graphicspath{{gfx/}}
 
-\newcommand{\photo}[1]{
+\newcommand{\photo}[3]{
       \begin{center}
-            Photo: #1
+            \includegraphics[width=#3in]{photos/#1/#2}
       \end{center}
 }
 
@@ -35,7 +35,7 @@
 \def\vhalf{Valve half}
 \def\hhalf{\han{} half}
 
-\photo{The assembled puzzle}
+\photo{valve}{puzzle}{1.5}
 
 \subsection{Overview}
 
@@ -47,14 +47,18 @@ The Valve device consists of the following components:
       \item The silver colored \han{} ring with ``HANAYAMA'' printed on one side.
 \end{enumerate}
 These components are shown below, disassembled, in the above order from left to right.
-\photo{The components, from the top, from left to right in the above order}
+\photo{valve}{components-top}{2.5}
+\photo{valve}{components-angle}{2.5}
 Note that, in the fully assembled state, the ``VALVE'' and ``HANAYAMA'' labels on the half rings are on opposite sides of the puzzle, like the two sides of a coin.
 
-\subsection{Structure}
+\subsection{Internal Structure} \label{sec:valve:struct}
 
 The entire puzzle is can be divided up into a circle consisting of six segments that correspond to the six sides of the hexagons on the inner and outer rings, and three layers.
 This is most clearly observed at the sides of the half rings, the insides and outsides of which are shown, respectively, below spread out with orientations as it normally assembled in the puzzle.
-\photo{Inside/outside the half rings spread out}
+\begin{center}
+      \includegraphics[height=0.955in]{photos/valve/halves-inside}
+      \includegraphics[height=0.955in]{photos/valve/halves-outside}
+\end{center}
 A software model of the Valve puzzle was created to aid in devising a solution, and the models for the insides and outsides are shown below, respectively.
 \valvediagram{halves-00}
 In the model, the black section with H's is the \hhalf{} ring and the white section with the V's is the \vhalf{} ring.
@@ -63,7 +67,7 @@ Note how the model corresponds with the above photos.
 Both the inner and outer rings feature horizontal extrusions at various segments and layers that slide around in the grooves on the insides (for the inner ring) and outsides (for the outer ring) of the half rings.
 This forms a kind of maze that has to be blindly navigated in order to disassemble and reassemble the puzzle.
 It is not possible to fully view all the extrusions in a photo of the inner and outer rings, but they are shown below at an angle the renders some of them visible.
-\photo{Angled view of inner and outer rings}
+\photo{valve}{rings}{2.5}
 These extrusions are also modeled in software, shown below, corresponding to the photo above.
 \valvediagram{rings-00}
 Here the inner ring is peach-colored and labeled with I's while the outer ring is pink and labeled with O's.
@@ -82,7 +86,7 @@ The hexagon inside in the inner ring will be aligned with the hexagon outside th
 
 This is the starting position we shall use.
 A picture of this starting position is shown below with the corresponding model:
-\photo{Starting position}
+\photo{valve}{starting-position}{1.5}
 \valvediagram{starting-00}
 After every step the hexagons will be aligned in the same way and, in what follows, we refer to rotations by a certain number of \emph{segments}.
 A segment refers to a single side of the hexagon so that, for example, a rotation clockwise one segment will rotate in that direction $360^\circ / 6 = 60^\circ$, or one sixth of a full rotation, such that the hexagon of the rotated ring looks the same as before.
@@ -104,7 +108,7 @@ From the starting position, the solution to disassemble the device is as follows
       \item Rotate the inner ring clockwise by one segment until it stops.
             The \vhalf{} should drop down another layer, taking the inner ring along with it.
             \valvediagram{apart-05}
-      \item Rotate the outer ring \cc{} by two segments.
+      \item Rotate the outer ring \cc{} by two segments, exposing the top extrusion of the outer ring.
             The \hhalf{} should drop down one layer.
             \valvediagram{apart-06}
       \item Rotate the inner ring \cc{} by one segment until it stops.
@@ -121,18 +125,19 @@ From the starting position, the solution to disassemble the device is as follows
 \subsection{Reassembly}
 
 Reassembling the puzzle can be a bit tricky at first.
-To do so, perform the following steps:
+It may be helpful to review section~\ref{sec:valve:struct} now that the puzzle is apart, and the components can be inspected.
+Of particular importance for the initial step of reassembly is how the model relates to the physical components.
 \begin{enumerate}
       \item Fit and hold the inner ring along with the half rings according to the model below.
-            The \hhalf{} should be on the right with its label facing up, and the Valve left on the right with its label facing down, in the same general orientation as for the disassembly.
+            The \hhalf{} should be on the right with its label facing up on the bottom, and the Valve left on the right with its label facing down, in the same general orientation as for the disassembly.
             \valvediagram{together-01}
             In the real world this looks like this:
-            \photo{Initial clump}
+            \photo{valve}{together-1}{1.5}
       \item Still holding the inner and half rings with one hand so that they do not fall apart, place the outer ring on top with the other hand with the two lower extrusions resting on the top of the \vhalf{}, shown below.
-            \photo{Outer ring on top}
-      \item Still holding the inner and half rings together, turn the outer ring by three segments in either direction, that is $180^\circ$.
+            \photo{valve}{together-2}{1.5}
+      \item Still holding the inner and half rings together, turn the outer ring by three segments in either direction, that is $180^\circ$, so that the lower extrusions both rotate inside the \hhalf{}.
             The puzzle should now look as below:
-            \photo{Outer twisted}
+            \photo{valve}{together-3}{1.5}
             The corresponding model state is:
             \valvediagram{together-03}
       \item Push the \vhalf{} up a layer (as far as it will go) and hold it there.
@@ -157,7 +162,7 @@ To do so, perform the following steps:
             \valvediagram{together-10}
       \item Holding the \hhalf{} up, rotate the outer ring clockwise by one segment, locking the \hhalf{} up into place, level with the \vhalf{}.
             \valvediagram{together-11}
-      \item Rotate the inner ring clockwise two segments until it stops and the outer ring one segment clockwise.
+      \item Rotate the inner ring clockwise two segments until it stops.
             The puzzle is now back in its starting position.
             \valvediagram{starting-00}
 \end{enumerate}
