@@ -95,6 +95,29 @@ impl Mode {
     }
 }
 
+#[derive(Clone, Copy, Debug, Default, Display)]
+pub enum TipSide {
+    #[default]
+    #[display("See-through")]
+    SeeThrough,
+    Physical,
+}
+impl TipSide {
+    pub fn next(&self) -> Self {
+        match self {
+            TipSide::SeeThrough => Self::Physical,
+            TipSide::Physical => Self::SeeThrough,
+        }
+    }
+
+    pub fn is_physical(&self) -> bool {
+        match self {
+            TipSide::SeeThrough => false,
+            TipSide::Physical => true,
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug)]
 pub enum ArrowKey {
     Up,
@@ -124,6 +147,7 @@ impl ArrowKey {
 pub struct Controller {
     origin: Origin,
     mode: Mode,
+    tip_side: TipSide,
 }
 impl Controller {
     pub fn current_origin(&self) -> Origin {
@@ -132,6 +156,10 @@ impl Controller {
 
     pub fn current_mode(&self) -> Mode {
         self.mode
+    }
+
+    pub fn current_tip_side(&self) -> TipSide {
+        self.tip_side
     }
 
     pub fn check_for_action(&mut self) -> Option<Action> {
@@ -154,8 +182,12 @@ impl Controller {
             self.origin = self.origin.next();
         }
 
-        if is_key_pressed(KeyCode::Space) {
+        if is_key_pressed(KeyCode::GraveAccent) {
             self.mode = self.mode.next();
+        }
+
+        if is_key_pressed(KeyCode::Space) {
+            self.tip_side = self.tip_side.next();
         }
 
         ArrowKey::check_down().map(|a| Action::Move {

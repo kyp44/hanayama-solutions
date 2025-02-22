@@ -9,7 +9,7 @@ use state::{State, Undo};
 
 const MAZE_SIZE_I32: i32 = 480;
 const MARGIN_I32: i32 = 20;
-const HUD_HEIGHT: i32 = 60;
+const HUD_HEIGHT: i32 = 80;
 const FONT_SIZE: f32 = 30.;
 const BACKGROUND_COLOR_HEX: u32 = 0x001a33;
 
@@ -63,13 +63,28 @@ async fn main() -> Result<(), anyhow::Error> {
 
         // Draw maze images
         draw_texture(&rear_side, MARGIN, MARGIN, WHITE);
-        draw_texture(&tip_side, rear_side.width() + 3.0 * MARGIN, MARGIN, WHITE);
+
+        let tip_physical = controller.current_tip_side().is_physical();
+        let mut params = DrawTextureParams::default();
+        params.flip_y = tip_physical;
+
+        draw_texture_ex(
+            &tip_side,
+            rear_side.width() + 3.0 * MARGIN,
+            MARGIN,
+            WHITE,
+            params,
+        );
 
         // Draw nubs/shoe
         let state = undo.current();
         let rear_nub = state.rear_nub_position() + REAR_CENTER;
-        let tip_nub = state.tip_nub_position() + TIP_CENTER;
-        //let tip_nub = state.tip_nub_position() + REAR_CENTER;
+        let tip_nub = if tip_physical {
+            let pos = state.tip_nub_position();
+            pos.with_y(-pos.y)
+        } else {
+            state.tip_nub_position()
+        } + TIP_CENTER;
         let shoe = state.shoe_position() + REAR_CENTER;
 
         draw_circle(rear_nub.x, rear_nub.y, NUB_RADIUS, Origin::RearNub.color());
@@ -86,16 +101,23 @@ async fn main() -> Result<(), anyhow::Error> {
             WHITE,
         );
         draw_text(
-            &format!("Origin: {}", origin),
+            &format!("Origin (tab): {}", origin),
             HUD_ORIGIN.x,
             HUD_ORIGIN.y + dimensions.height,
             FONT_SIZE,
             origin.color(),
         );
         draw_text(
-            &format!("Mode: {}", controller.current_mode()),
+            &format!("Mode (~): {}", controller.current_mode()),
             HUD_ORIGIN.x,
             HUD_ORIGIN.y + 2. * dimensions.height,
+            FONT_SIZE,
+            WHITE,
+        );
+        draw_text(
+            &format!("Tip side (space): {}", controller.current_tip_side()),
+            HUD_ORIGIN.x,
+            HUD_ORIGIN.y + 3. * dimensions.height,
             FONT_SIZE,
             WHITE,
         );
